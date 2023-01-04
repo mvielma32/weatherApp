@@ -9,12 +9,8 @@ document.querySelector("#generate").addEventListener('click', generateWeather);
 
 function generateWeather() {
     let newZip = document.querySelector("#zip").value;
-    
-    //Geo API call
     getWeather(geoURL, newZip, key)
-    .then(
-        updateUI()
-    )
+    
 };
 
 //POST Data
@@ -22,7 +18,7 @@ async function postData(url = '', data = {}) {
     console.log(data);
     const response = await fetch(url, {
         method: 'POST',
-        // credentials: 'same-origin',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -43,8 +39,10 @@ const getWeather = async (geoURL, newZip, key) => {
         const zipData = await zipRes.json();
         let newFeels = document.querySelector("#feelings").value;
         console.log(zipData);
-        postData('/addWeather', {temp: zipData.main.temp, date: zipData.dt, userResponse: newZip, feelings: newFeels});
-        // return zipData;
+        postData('/addWeather', {temp: zipData.main.temp, date: zipData.dt, userResponse: newZip, feelings: newFeels})
+        .then(
+            updateUI()
+        )
     } catch (error) {
         console.log('error', error);
     };
@@ -55,7 +53,6 @@ const updateUI = async () => {
     const request = await fetch ('/getWeather');
     try{
         const allData = await request.json();
-        console.log (allData);
         // Create a new date instance dynamically with JS
         let d = new Date(allData.date * 1000);
         let newDate = d.getMonth()+1+'/'+ d.getDate()+'/'+ d.getFullYear();
