@@ -8,5 +8,14 @@
     "start": "node server.js"
   },
   "author": "Michael Vielma mvielma32@proton.me",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvielma32/ud-landing-page.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mvielma32/ud-landing-page/issues"
+  },
+  "homepage": "https://github.com/mvielma32/ud-landing-page#readme"
 }
